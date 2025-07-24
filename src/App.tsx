@@ -13,7 +13,8 @@ import {
   Label,
   DefaultButton,
   Toggle,
-  Separator
+  Separator,
+  Spinner
 } from '@fluentui/react';
 
 
@@ -28,6 +29,8 @@ function App() {
   const [part, setPart] = useState<VIAM.appApi.RobotPart | undefined>(undefined);
   const [image, setImage] = useState<string | undefined>("");
   const [sensorValue, setSensorValue] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [robotConnectErr, setRobotConnectErr] = useState<string | undefined>("");
   const API_KEY_ID = "65004ced-6af2-4180-af36-4379e271bc37";
   const API_KEY = "7u4uu86t6npez87ywcbknszqxop939vj";
   
@@ -78,6 +81,7 @@ useEffect(() => {
   let sensorClient: VIAM.SensorClient | null = null;
   let cameraClient: VIAM.CameraClient | null = null;
   const connect = async () => {
+    try {
     const robotParts = await dataClient.appClient.getRobotParts((selectedRobot.key as string));
     const mainPart = robotParts?.find(p => p.mainPart);
     if (!mainPart) return;
@@ -85,6 +89,7 @@ useEffect(() => {
     setPart(mainPart);
 
     const host = mainPart.fqdn;
+    try {
     robotClient = await VIAM.createRobotClient({
       host,
       credentials: {
@@ -94,14 +99,23 @@ useEffect(() => {
       },
       signalingAddress: 'https://app.viam.com:443',
     });
-    sensorClient = await new VIAM.SensorClient(robotClient, "sensor-3");
+     sensorClient = await new VIAM.SensorClient(robotClient, "sensor-3");
     setSensorValue(JSON.stringify(await sensorClient.getReadings()))
     setRobotClient(robotClient)
     // 3. Camera client
     cameraClient = new VIAM.CameraClient(robotClient, 'cam');
     setCameraClient(cameraClient);
     const leftMotor = new VIAM.MotorClient(robotClient, "left");
+    } catch (err: any) {
+      console.error("Error creating robot client:", err);
+      console.log("hi")
+      setRobotConnectErr(err.toString())
+    }
+    setIsLoading(false);
+  } catch (err) {
+    console.error("Error connecting to robot:", err);
   }
+}
   connect()
 }, [selectedRobot])
 
@@ -163,9 +177,9 @@ const onButtonPress = async () => {
 
   // <Insert HTML block code here in later steps>
   return (
-    <Stack verticalFill styles={{ root: { height: '100vh', padding: 20 } }} tokens={{ childrenGap: 20 }}>
+    <Stack verticalFill styles={{ root: { height: '100vh', padding: 20} }} tokens={{ childrenGap: 20 }}>
       {/* Header */}
-      <Stack horizontal horizontalAlign="space-between" verticalAlign="center">
+      <Stack horizontal horizontalAlign="space-between" verticalAlign="end" styles={{ root: { paddingLeft: 10} }}>
         <Text variant="xLarge">Viam Dashboard</Text>
         <DefaultButton text="Sign Out" />
       </Stack>
@@ -177,7 +191,7 @@ const onButtonPress = async () => {
         {/* Left Panel */}
         <Stack
           tokens={{ childrenGap: 15 }}
-          styles={{ root: { width: 250, padding: 10, border: '1px solid #ddd', borderRadius: 4 } }}
+          styles={{ root: { width: 250, padding: 10} }}
         >
           <Text variant="large">Connected Robots</Text>
           <Dropdown
@@ -191,19 +205,21 @@ const onButtonPress = async () => {
         </Stack>
 
         {/* Right Panel */}
+        <Separator vertical={true}/>
+
         <Stack
           tokens={{ childrenGap: 20 }}
           styles={{
             root: {
               flexGrow: 1,
               padding: 20,
-              border: '1px solid #ddd',
               borderRadius: 4,
+              backgroundColor: '#FFFFFF'
             },
           }}
         >
           <Text variant="large">Robot Details</Text>
-          {selectedRobot ? (
+          {robotConnectErr?.length ? <Text variant= "mediumPlus">{robotConnectErr} </Text>: selectedRobot && !isLoading ? (
             <Stack tokens={{ childrenGap: 10 }}>
               <Text variant="mediumPlus">Robot: {selectedRobot.text}</Text>
               <Label>Live Camera Feed</Label>
@@ -220,7 +236,7 @@ const onButtonPress = async () => {
 
               <Separator />
 
-              <Text variant="mediumPlus">Controls</Text>
+              <Text variant="large">Controls</Text>
               <Stack horizontal tokens={{ childrenGap: 10 }}>
                 <DefaultButton text="Move Robot" onClick={async() => onButtonPress()} />
                 <DefaultButton text="Turn On Light" onClick={() => alert('Light toggled!')} />
@@ -231,7 +247,7 @@ const onButtonPress = async () => {
                 />
               </Stack>
             </Stack>
-          ) : (
+          ) : selectedRobot && isLoading ? <Stack styles={{root: {padding: 50}}}><Spinner /></Stack> : (
             <Text variant="medium">Please select a robot to view details.</Text>
           )}
         </Stack>
