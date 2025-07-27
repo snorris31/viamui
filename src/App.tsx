@@ -36,7 +36,7 @@ function App() {
     <Stack
       verticalFill
       styles={{ root: { height: "100vh" } }}
-      tokens={{ childrenGap: 20 }}
+      tokens={{ childrenGap: 5 }}
     >
       <Stack
         horizontal
@@ -67,7 +67,7 @@ function App() {
 
       <Stack
         horizontal
-        tokens={{ childrenGap: 20 }}
+        tokens={{ childrenGap: 5 }}
         styles={{ root: { flexGrow: 1 } }}
       >
         <RobotDetails
@@ -79,7 +79,7 @@ function App() {
           pollCount={pollCount}
         />
         <Stack
-          tokens={{ childrenGap: 20 }}
+          tokens={{ childrenGap: 10 }}
           styles={{
             root: {
               flexGrow: 1,
