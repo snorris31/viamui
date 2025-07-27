@@ -9,7 +9,7 @@ import {
   Stack,
 } from "@fluentui/react";
 import Controls from "./Controls";
-import { ComponentName } from "./constants/components";
+import { ComponentName } from "../constants/components";
 
 type CameraProps = {
   selectedRobot: string;
@@ -44,7 +44,12 @@ const CameraFeed: React.FC<CameraProps> = ({
       <Stack horizontal tokens={{ childrenGap: 30 }}>
         <Stack
           styles={{
-            root: { position: "relative", height: "80vh", width: "85vw" },
+            root: {
+              position: "relative",
+              height: "80vh",
+              width: "85vw",
+              paddingBottom: 20,
+            },
           }}
         >
           <Image

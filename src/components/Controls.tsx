@@ -13,7 +13,7 @@ import {
 import React, { useState } from "react";
 import * as VIAM from "@viamrobotics/sdk";
 import ButtonComponent from "./ButtonComponent";
-import StatusList from "./StatusList";
+import StatusList from "../StatusList";
 
 type ControlsProps = {
   robotClient: VIAM.RobotClient | null;
@@ -38,10 +38,11 @@ const Controls: React.FC<ControlsProps> = ({ robotClient }) => {
   return (
     <Stack
       tokens={{ childrenGap: 20 }}
+      horizontalAlign="center"
       styles={{
         root: {
           flexGrow: 1,
-          padding: 20,
+          padding: 10,
           borderRadius: 4,
         },
       }}
@@ -68,15 +69,13 @@ const Controls: React.FC<ControlsProps> = ({ robotClient }) => {
         }}
         text="ComponentStatus"
       />
-      <Stack horizontal>
+      <Stack horizontal horizontalAlign="center">
         <Toggle
           checked={cameraToggle}
           onChange={(e, checked) => setCameraToggle(!!checked)}
           styles={{ root: { width: "50px", marginRight: 10 } }}
         />
-        <Text styles={{ root: { width: 200, color: "#FFFFFF" } }}>
-          Switch Camera
-        </Text>
+        <Text styles={{ root: { color: "#FFFFFF" } }}>Switch Camera</Text>
       </Stack>
       <StatusList
         isOpen={componentButtonClicked}

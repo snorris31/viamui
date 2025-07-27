@@ -12,8 +12,8 @@ import {
 } from "@fluentui/react";
 import { initializeIcons } from "@fluentui/react/lib/Icons";
 import { ComponentName } from "./constants/components";
-import CameraFeed from "./CameraFeed";
-import RobotDetails from "./RobotDetails";
+import CameraFeed from "./components/CameraFeed";
+import RobotDetails from "./components/RobotDetails";
 import { useRobotDashboard } from "./hooks/useRobotDashboard";
 
 initializeIcons();
