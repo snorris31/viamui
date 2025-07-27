@@ -1,15 +1,4 @@
-import {
-  DefaultButton,
-  Icon,
-  Stack,
-  Toggle,
-  Text,
-  DetailsList,
-  DetailsListLayoutMode,
-  Panel,
-  SelectionMode,
-  IColumn,
-} from "@fluentui/react";
+import { Stack, Toggle, Text } from "@fluentui/react";
 import React, { useState } from "react";
 import * as VIAM from "@viamrobotics/sdk";
 import ButtonComponent from "./ButtonComponent";

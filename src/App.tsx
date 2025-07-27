@@ -1,20 +1,18 @@
-import { useEffect, useState } from "react";
 import "./App.css";
-import * as VIAM from "@viamrobotics/sdk";
-import { createDataClient, createRobotClient } from "./hooks/useViamClient";
 import {
   Stack,
   Text,
-  IDropdownOption,
+  Image,
   Spinner,
   Icon,
   ActionButton,
+  ImageFit,
 } from "@fluentui/react";
 import { initializeIcons } from "@fluentui/react/lib/Icons";
-import { ComponentName } from "./constants/components";
 import CameraFeed from "./components/CameraFeed";
 import RobotDetails from "./components/RobotDetails";
 import { useRobotDashboard } from "./hooks/useRobotDashboard";
+import logo from "./assets/viamlogo.png"; // adjust the path as needed
 
 initializeIcons();
 
@@ -46,22 +44,35 @@ function App() {
           root: {
             height: "78px",
             padding: "0 16px",
-            backgroundColor: "#f3f2f1",
+            backgroundColor: "#000000",
             boxShadow: "0 1px 4px rgba(0,0,0,0.1)",
             borderBottom: "1px solid #ddd",
           },
         }}
       >
         <Stack horizontal tokens={{ childrenGap: 10 }}>
-          <Icon iconName="Robot" styles={{ root: { fontSize: 25 } }} />
-
-          <Text variant="xLarge">Viam Dashboard</Text>
+          <Image
+            src={logo}
+            imageFit={ImageFit.cover}
+            styles={{
+              root: {
+                position: "relative",
+                height: "70px",
+                width: "100px",
+              },
+            }}
+          />
         </Stack>
         <Stack>
-          <Text variant="smallPlus" styles={{ root: { color: "#666" } }}>
+          <Text variant="smallPlus" styles={{ root: { color: "#FFFFFF" } }}>
             Logged in as: norrismsara@gmail.com
           </Text>
-          <ActionButton iconProps={{ iconName: "SignOut" }} text="Sign Out" />
+
+          <ActionButton
+            iconProps={{ iconName: "SignOut" }}
+            text="Sign Out"
+            styles={{ root: { color: "#FFFFFF" } }}
+          />
         </Stack>
       </Stack>
 

@@ -23,7 +23,7 @@ const RobotDetails: React.FC<RobotProps> = ({
       tokens={{ childrenGap: 25 }}
       styles={{
         root: {
-          width: "15%",
+          width: "25%",
           padding: 20,
           background: "white",
           borderRadius: 8,

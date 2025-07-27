@@ -28,12 +28,15 @@ const CameraFeed: React.FC<CameraProps> = ({
     const connect = async () => {
       if (!robotClient) return;
       let sensorClient: VIAM.SensorClient | null = null;
-
-      sensorClient = await new VIAM.SensorClient(
-        robotClient,
-        ComponentName.SensorClient
-      );
-      setSensorValue(JSON.stringify(await sensorClient.getReadings()));
+      try {
+        sensorClient = await new VIAM.SensorClient(
+          robotClient,
+          ComponentName.SensorClient
+        );
+        setSensorValue(JSON.stringify(await sensorClient.getReadings()));
+      } catch (err) {
+        console.error(err);
+      }
     };
     connect();
   }, [robotClient]);
@@ -47,7 +50,7 @@ const CameraFeed: React.FC<CameraProps> = ({
             root: {
               position: "relative",
               height: "80vh",
-              width: "85vw",
+              width: "80vw",
               paddingBottom: 20,
             },
           }}
