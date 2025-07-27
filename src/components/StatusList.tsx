@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import * as VIAM from "@viamrobotics/sdk";
-import ButtonComponent from "./components/ButtonComponent";
+import React from "react";
 import {
   DetailsList,
   DetailsListLayoutMode,

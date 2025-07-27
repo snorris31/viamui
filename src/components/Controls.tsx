@@ -2,7 +2,7 @@ import { Stack, Toggle, Text } from "@fluentui/react";
 import React, { useState } from "react";
 import * as VIAM from "@viamrobotics/sdk";
 import ButtonComponent from "./ButtonComponent";
-import StatusList from "../StatusList";
+import StatusList from "./StatusList";
 
 type ControlsProps = {
   robotClient: VIAM.RobotClient | null;
