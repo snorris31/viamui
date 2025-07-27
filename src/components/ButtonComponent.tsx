@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import * as VIAM from "@viamrobotics/sdk";
+import React from "react";
 import { DefaultButton, Icon } from "@fluentui/react";
 
 type ControlsProps = {

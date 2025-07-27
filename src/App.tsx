@@ -4,15 +4,14 @@ import {
   Text,
   Image,
   Spinner,
-  Icon,
   ActionButton,
   ImageFit,
 } from "@fluentui/react";
 import { initializeIcons } from "@fluentui/react/lib/Icons";
 import CameraFeed from "./components/CameraFeed";
-import RobotDetails from "./components/RobotDetails";
+import RobotDetails from "./components/RobotDetails/RobotDetails";
 import { useRobotDashboard } from "./hooks/useRobotDashboard";
-import logo from "./assets/viamlogo.png"; // adjust the path as needed
+import logo from "./assets/viamlogo.png";
 
 initializeIcons();
 

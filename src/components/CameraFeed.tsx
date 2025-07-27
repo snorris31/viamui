@@ -1,13 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as VIAM from "@viamrobotics/sdk";
-import {
-  Text,
-  Image,
-  ImageFit,
-  Label,
-  Separator,
-  Stack,
-} from "@fluentui/react";
+import { Text, Image, ImageFit, Stack } from "@fluentui/react";
 import Controls from "./Controls";
 import { ComponentName } from "../constants/components";
 
@@ -96,11 +89,6 @@ const CameraFeed: React.FC<CameraProps> = ({
             <Controls robotClient={robotClient} />
           </Stack>
         </Stack>
-        {/* 
-        <Stack horizontalAlign="start">
-          {" "}
-          <Controls robotClient={robotClient} />
-        </Stack> */}
       </Stack>
     </Stack>
   );

@@ -27,8 +27,6 @@ export function useRobotDashboard() {
 
   useEffect(() => {
     const connect = async () => {
-      // Replace "<API-KEY-ID>" (including brackets) with your machine's
-      // Replace "<API-KEY>" (including brackets) with your machine's API key
       const client = await createDataClient();
       setDataClient(client);
       const organizations = await client.appClient.listOrganizations();

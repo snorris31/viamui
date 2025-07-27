@@ -1,6 +1,8 @@
-# Getting Started with Create React App
+# Getting Started with the dashboard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This dashboard uses react-scripts, and makes calls to VIAM's API. For the API portion, please make sure to include a .env file with the API key, Key ID and Signaling address. For more information on VIAM, check the docs: https://docs.viam.com/
+
+Be sure to download node and run npm install before starting.
 
 ## Available Scripts
 
